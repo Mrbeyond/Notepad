@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notepad</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid" >
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+            <a class="navbar-brand">Brand</a>
+            <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/list">All files</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/txt">Text files</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/html">Html files</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="card shadow mt-1 rounded">
+            <div class="card-body">
+                <div class="row" >
+                    <div class="col col-md-4">
+                       <div class="card shadow rounded" style="height: 560px">
+                           <div class="card-header bg-primary text-white d-flex justify-content-center">
+                                Write your file here
+                           </div>
+                           <div class="card-body pt-0">
+                               <form method="POST" action="/" >   
+                                <div class="d-md-flex justify-content-around">
+                                    <span class=" mr-md-5 "><small>File name</small> </span>    
+                                    <span class=" pl-md-5 ml-md-5"><small>File type</small></span>     
+                                </div>
+                                
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="the_name" placeholder="Enter file name"
+                                     aria-label="Recipient's " aria-describedby="my-addon">
+                                    <div class="input-group-append">
+                                        <select id="my-select" class="form-control" name="the_type" onchange="ye(this)" >
+                                            <option value=".txt">txt</option>
+                                            <option value=".html">html</option>
+                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trea"><small>Editor</small> </label>
+                                    <textarea id="trea" class="form-control rounded-lg shadow" style="height: 350px" name="doc" rows="3"></textarea>
+                                </div>
+                                <div class="form-group d-flex justify-content-center">
+                                    <input value="Create" class="btn btn-primary shadow"  type="submit" name="submit">
+                                </div>
+                                </form>
+                            </div>
+                       </div> 
+                    </div>
+
+                    <div class="col col-md-4">
+                        <div class="card shadow-lg rounded-lg" style="height: 560px">
+                            <div class="card-header bg-success text-white d-flex justify-content-center">
+                                List of all files
+                            </div>
+                            <div class="card-body">
+                                <%if(directory){%>
+                                    <ul class="list-unstyled">
+                                       <%directory.forEach(file => {%>
+                                            <li class="list-item my-2 ">
+                                                <div class="card  shadow ">
+                                                    <div class="  d-flex justify-content-center">
+                                                         <a href="/test/<%= file%>" class="btn text-primary py-0  px-5"><%= file%></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                       <%});%>
+                                    </ul>
+                                <%}else{%>
+                                    <div class="card p-md-3">
+                                       <div class="alert alert-info" role="alert">
+                                          There is no file in your Notebook
+                                       </div>
+                                    </div>
+                                <%}%>
+                            </div>
+                        </div> 
+                    </div>
+
+
+                    <div class="col col-md-4">
+                        <div class="card shadow-lg rounded-lg" style="height: 560px">
+                            <div class="card-header bg-secondary text-white d-flex justify-content-center">
+                                Notebook
+                            </div>
+                            <div class="card-body pt-1">
+                                <%if(jCreated){ %>
+                                    <small  class="alert alert-success py-0 d-block pl-md-5 shadow">New file Created</small> 
+                                    <%if(type==".html"){%>
+                                        <%- jCreated %>
+                                    <%}else{%>
+                                        <%=jCreated%>
+                                    <%}%>
+                                <%}%>
+                            </div> <!-- check later-->
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+</body>
+<script>
+   
+     function ye(e){
+        if(e.value==".html"){
+            trea.style.backgroundColor="black";
+            trea.style.color="orange";
+        }
+        if(e.value==".txt") {
+            trea.style.color="black";
+            trea.style.backgroundColor="white";          
+        }
+     }
+</script>
+
+</html>

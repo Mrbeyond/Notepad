@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<div style="position: relative;">
+		<span id="sp1"></span><br><br><br><span id="sp2"></span>
+	</div>
+</body>
+<script>
+	class ANIMATION{
+		constructor(para){
+			para.style.width="50px";
+	 		para.style.height="50px";
+	 		para.style.position="absolute";
+
+	 		this.demo(para);
+		}
+		demo=(para)=>{ 		
+	 		const array =["blue", "green","brown","yellow", "orange", "purple"];
+	 		const num = Math.floor(Math.random() * array.length+1);
+	 		para.style.backgroundColor=(array[num])
+	 		para.style.marginTop=Math.floor(Math.random()*50)+"px";
+			para.style.marginLeft=Math.floor(Math.random()*200)+"px"; 			
+		}
+	}
+	// setInterval((new ANIMATION(sp1), 1000));
+	function hh(){
+		alert();
+	}
+	setInterval((()=>{new ANIMATION(sp1); new ANIMATION(sp2)}),1000);
+	
+
+</script>
+</body>
+</html>
